@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     colors: {
       ...colors,
-      gray: colors.teal,
+      gray: colors.trueGray,
     },
   },
   variants: {

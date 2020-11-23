@@ -31,7 +31,7 @@ export default function Register() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-800">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-md space-y-8">
           <div className="w-full max-w-xs">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 dark:bg-gray-700" method="post" action="/api/auth/callback/credentials">
               <div className="mb-4">
@@ -61,6 +61,9 @@ export default function Register() {
                 </Link>
               </div>
             </form>
+            <p className="text-center text-gray-500 text-xs">
+              &copy;2020 Workfly. All rights reserved.
+            </p>
           </div>
         </div>
       </div>

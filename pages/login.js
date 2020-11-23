@@ -10,7 +10,7 @@ export default function Login({ csrfToken }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-800">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-md space-y-8">
           <div className="w-full max-w-xs">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 dark:bg-gray-700" method="post" action="/api/auth/callback/credentials">
               <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
@@ -18,7 +18,7 @@ export default function Login({ csrfToken }) {
                 <label className="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300" for="email">
                   Email
                 </label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-gray-700 dark:text-gray-300" id="email" name="email" type="emails" placeholder="Email" />
+                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-gray-700 dark:text-gray-300" id="email" name="email" type="email" placeholder="Email" />
               </div>
               <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300" for="password">

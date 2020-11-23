@@ -8,6 +8,12 @@ import Navbar from '../components/navbar'
 export default function Home({ session, projects }) {
   const router = useRouter();
 
+  useEffect(() => {
+    if (!session || !session.user) {
+      router.push('/login');
+    }
+  }, [session]);
+
   return (
     <>
       <Navbar session={session}></Navbar>

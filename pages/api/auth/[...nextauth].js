@@ -1,6 +1,7 @@
-import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
-import { User } from '../../../src/db';
+import NextAuth from 'next-auth'
+import Providers from 'next-auth/providers'
+import bcrypt from 'bcrypt'
+import { fauna, q } from '../../../src/faunadb'
 
 const options = {
   pages: {
@@ -12,24 +13,23 @@ const options = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
-  // Configure one or more authentication providers
   providers: [
     Providers.Credentials({
       name: 'Credentials',
-      credentials: {
-        email: {
-          label: 'Email',
-          type: 'text',
-          placeholder: 'your@email.com',
-        },
-        password: { label: 'Password', type: 'password' },
-      },
       authorize: async (credentials) => {
-        const existingUser = await User.findOne({ email: credentials.email });
-        if (await existingUser.comparePassword(credentials.password)) {
-          return existingUser.toObject();
+        let user = await fauna.query(
+          q.Get(
+            q.Match(
+              q.Index('users_by_email'),
+              credentials.email
+            )
+          )
+        )
+        
+        if (await bcrypt.compare(credentials.password, user.data.password)) {
+          return user
         }
-        return null;
+        return null
       },
     }),
   ],
@@ -46,10 +46,7 @@ const options = {
       session.user = user;
       return Promise.resolve(session);
     },
-  },
-
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.MONGO_URL,
+  }
 };
 
 export default (req, res) => NextAuth(req, res, options);
